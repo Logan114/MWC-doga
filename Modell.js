@@ -1,34 +1,28 @@
-export default class Modell{
+export default class Modell {
     #kartyak = []
     #kiiras
-    constructor(kartyak,kiiras){
-        this.#kartyak = kartyak
-        this.#kiiras = kiiras
+
+    constructor() {
         this.kartyakBehelyezes()
     }
-    kartyakBehelyezes(kartyak){
-        kartyak.forEach(element,index => {
-            let random = Math.random()
-            if (random % 2 == 0){
-                kartyak(index) = "👻"
-            }
-            else{
-                kartyak(index) = "😈"
-            }
-        });
+
+    kartyakBehelyezes() {
+        for (let i = 0; i < 4; i++) {
+            const random = Math.random()
+            this.#kartyak.push(random < 0.3 ? "😈" : "👻")
+        }
     }
 
-    ellenorzes(index){
-        if (this.#kartyak(index) == "👻"){
-            kiiras = "megmentettek a jó lelkek!"
+    ellenorzes(index) {
+        if (this.#kartyak[index] === "👻") {
+            this.#kiiras = "Megmentettek a jó lelkek! 👻"
+        } else {
+            this.#kiiras = "Elvitt az ördög! 😈"
         }
-        else{
-            kiiras = "Elvitt az ördög!"
-        }
-        
+        return this.#kiiras
     }
-    getKartyak(kartyak){
-        this.#kartyak=kartyak
+
+    getKartyak() {
+        return this.#kartyak
     }
-    
 }

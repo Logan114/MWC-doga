@@ -1,30 +1,31 @@
-import Jatekter from "./jatekter.js"
-
-export default class Kartya{
+export default class Kartya {
     #kartya
     #szuloElem
-    #szellem
-    #ordog
-    constructor(kartya, szuloElem, szellem,ordog){
+    #div
+
+    constructor(kartya, szuloElem) {
         this.#kartya = kartya
-        this.#szuloElem = szuloElem
-        szuloElem = (".jatekter")
-        this.#szellem = szellem
-        this.#ordog = ordog
-        szellem = "👻"
-        ordog = "😈"
+        this.#szuloElem = $(szuloElem)
         this.kartyaTartalomGeneralas()
-
-    }
-    kartyaTartalomGeneralas(szuloElem,kartya){
-        this.#szuloElem.append(`<div class="kartya">${this.#kartya}</div>`)
+        this.kattintas()
 
     }
 
-    kattintas(){
-        $(window).on("click"(event) => {
-            
+    kartyaTartalomGeneralas() {
+        this.#div = $(`<div class="kartya card col-lg-3 col-md-4 col-sm-4"> <div class="card-body">${"❓"}</div></div>`)
+        this.#szuloElem.append(this.#div)   
+    }
 
+    kattintas() {
+        this.#div.on("click", () => {
+            const event = new CustomEvent("kartyaKattintas", {
+                detail: { kartya: this.#kartya }
+            })
+            this.#div[0].dispatchEvent(event)
         })
+    }
+
+    getDiv() {
+        return this.#div
     }
 }
